@@ -1,0 +1,37 @@
+{
+    "fish": [
+        {
+            "name": "Clownfish", 
+            "id": 1
+        },
+        {
+            "name": "Pufferfish", 
+            "id": 2
+        },
+        {
+            "name": "Cod", 
+            "id": 3
+        },
+        {
+            "name": "Tuna", 
+            "id": 4
+        },
+        {
+            "name": "Starfish", 
+            "id": 5
+        },
+        {
+            "name": "Carp", 
+            "id": 6
+        },
+        {
+            "name": "Goldfish", 
+            "id": 7
+        },
+        {
+            "name": "Turtle",
+            "id": 8
+        }
+        
+    ]
+}

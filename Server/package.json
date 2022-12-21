@@ -1,0 +1,23 @@
+{
+  "name": "fish-browser-game",
+  "version": "1.0.0",
+  "description": "First server for fish browser game created",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/junhyung0710/Fish-Browser-Game.git"
+  },
+  "author": "John Jun",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/junhyung0710/Fish-Browser-Game/issues"
+  },
+  "homepage": "https://github.com/junhyung0710/Fish-Browser-Game#readme",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
