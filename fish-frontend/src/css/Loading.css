@@ -1,0 +1,13 @@
+.loading {
+    margin-top: 80px;
+    border-radius: 5px;
+    background-color: #fff;
+    overflow: hidden;
+    transition: 0.5s;
+}
+    
+.bar {
+    background-color: 'orange';
+
+}
+    
