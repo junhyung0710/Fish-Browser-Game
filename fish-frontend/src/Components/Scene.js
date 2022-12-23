@@ -2,29 +2,28 @@ import React, { useRef, useState, Suspense, useEffect } from 'react'
 import { Canvas, useFrame } from '@react-three/fiber'
 import { useLoader } from '@react-three/fiber'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
-import { OrbitControls } from '@react-three/drei'
+import { OrbitControls, Sky } from '@react-three/drei'
 import UI from './UI'   
-import { AccessFishData } from './ServerFunctions/Access'
 
 function PlayerDetails() {
 
 }
 
-function handleFishClick() {
-    let fishid = Math.floor(Math.random() * 10)
-    
-}
-
-
+function handleFishClick() {}
 function Scene() {
     const gltf = useLoader(GLTFLoader, process.env.PUBLIC_URL + "/models/waterfall.glb")
-    const [fishList, setFishList] = useState([])
-    AccessFishData()
-    
     return(
-    <>
-        <Canvas>
+    <div style= {{position: 'relative', display: 'inline-block', width: '100vw', height: '100vh'}}>
+        <UI />
+        <Canvas style = {{position: 'absolute', zIndex: 1}}>
             <ambientLight />
+            <Sky turbidity = {10}
+					rayleigh = {3}
+					mieCoefficient = {0.005}
+					mieDirectionalG =  {0.7}
+					elevation =  {2}
+					azimuth =  {180}
+					exposure = {renderer.toneMappingExposure}/>
             <pointLight position={[10, 10, 10]} />
             <OrbitControls />
             <mesh
@@ -42,8 +41,7 @@ function Scene() {
                 <primitive object={gltf.scene} position = {[0,0.42,0]} />
             </Suspense>
         </Canvas>
-        <UI />
-    </>
+    </div>
         
     )
 }

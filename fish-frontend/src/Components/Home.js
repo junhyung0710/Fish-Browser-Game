@@ -4,11 +4,11 @@ import Loading from './Loading'
 
 function Home() {
     return (    
-      // <Suspense fallback = {<Loading />}>
-      //   <Scene />
-      // </Suspense>)
-      <Loading />
-    )
+      <Suspense fallback = {null}>
+         <Scene />
+       </Suspense>
+       )
+    
 }
 
 export default Home

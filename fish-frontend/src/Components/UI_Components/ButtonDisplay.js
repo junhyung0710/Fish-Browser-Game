@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { useEffect, useState } from "react"
-import '../css/ButtonDisplay.css'
+import './UI_Components_css/ButtonDisplay.css'
 function ButtonDisplay() {
     const [fishList, setFishList] = useState([])
     const [currentFish, setCurrentFish] = useState(0)
