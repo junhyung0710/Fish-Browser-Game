@@ -3,15 +3,18 @@ import { Canvas, useFrame } from '@react-three/fiber'
 import { useLoader } from '@react-three/fiber'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 import { OrbitControls, Environment } from '@react-three/drei'
+import { FBXLoader } from 'three/examples/jsm/loaders/FBXLoader'
 import UI from './UI'   
 
 function PlayerDetails() {
 
 }
 
+
 function handleFishClick() {}
 function Scene() {
     const gltf = useLoader(GLTFLoader, process.env.PUBLIC_URL + "/models/waterfall.glb")
+    const anglerFish = useLoader(FBXLoader, process.env.PUBLIC_URL + "/models/FBX/Cardinalfish.fbx")
     return(
     <div style= {{position: 'relative', display: 'inline-block', width: '100vw', height: '100vh'}}>
         <UI />
@@ -38,7 +41,8 @@ function Scene() {
                 <Suspense fallback={null}>
                     <primitive object={gltf.scene} position = {[0,0.42,0]} />
                 </Suspense>
-            </Suspense>
+                <primitive object = {anglerFish} scale = {[0.005, 0.005, 0.005]} position = {[5, 2, 0]} frustumCulled = {true} rotation = {[0, 0, 0]}/>
+            </Suspense>9i
         </Canvas>
     </div>
         
