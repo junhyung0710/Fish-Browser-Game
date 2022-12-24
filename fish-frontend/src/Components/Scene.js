@@ -5,6 +5,9 @@ import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 import { OrbitControls, Environment } from '@react-three/drei'
 import { FBXLoader } from 'three/examples/jsm/loaders/FBXLoader'
 import UI from './UI'   
+import { Koi } from '../Components/Fishes/Koi'
+import { AnimationActionLoopStyles } from 'three'
+import { useGLTF } from '@react-three/drei'
 
 function PlayerDetails() {
 
@@ -14,7 +17,7 @@ function PlayerDetails() {
 function handleFishClick() {}
 function Scene() {
     const gltf = useLoader(GLTFLoader, process.env.PUBLIC_URL + "/models/waterfall.glb")
-    const anglerFish = useLoader(FBXLoader, process.env.PUBLIC_URL + "/models/FBX/Cardinalfish.fbx")
+    useGLTF.preload(process.env.PUBLIC_URL + "/models/GLB/Koi.glb");
     return(
     <div style= {{position: 'relative', display: 'inline-block', width: '100vw', height: '100vh'}}>
         <UI />
@@ -41,8 +44,8 @@ function Scene() {
                 <Suspense fallback={null}>
                     <primitive object={gltf.scene} position = {[0,0.42,0]} />
                 </Suspense>
-                <primitive object = {anglerFish} scale = {[0.005, 0.005, 0.005]} position = {[5, 2, 0]} frustumCulled = {true} rotation = {[0, 0, 0]}/>
-            </Suspense>9i
+                <Koi position = {[4, 4, 4]}/>
+            </Suspense>
         </Canvas>
     </div>
         
