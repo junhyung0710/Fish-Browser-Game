@@ -1,5 +1,6 @@
 
 import React, { useRef, useEffect } from "react";
+import { useFrame } from "@react-three/fiber"
 import { useGLTF, useAnimations } from "@react-three/drei";
 import { useBox } from '@react-three/cannon';
 
@@ -7,6 +8,7 @@ export function Koi(props) {
   const group =  useRef()
   const { nodes, materials, animations } = useGLTF(process.env.PUBLIC_URL + "/models/GLB/Koi.glb");
   const { actions } = useAnimations(animations, group);
+  // useFrame(() => (group.current.position.x += 0.01));
   return (
       <group ref={group} {...props} dispose={null} onClick = {(e) => actions.Swimming_Fast.play()}>
         <group name="Scene">
