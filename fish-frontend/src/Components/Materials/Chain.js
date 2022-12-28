@@ -1,9 +1,7 @@
 import React, { Suspense, useRef, forwardRef, useEffect, useState} from "react";
 import { useGLTF } from "@react-three/drei";
 import { useSphere, useDistanceConstraint, useCylinder, useLockConstraint } from "@react-three/cannon"
-import { Koi, Anglerfish, Betta, BlackLionFish, Blobfish, BlueGoldfish } from '../Fish/Fishes'
-export const FishChain = forwardRef((props, ref) => {
-    const FishRef = useRef()
+export const FishChain = (props) => {
     const [link1] = useSphere(() => ({
         mass: 0,
         position: [25,20,0]
@@ -25,38 +23,18 @@ export const FishChain = forwardRef((props, ref) => {
     position: [25,12,0]
     }));
 
-    useDistanceConstraint(link1, link2, {
+    const constraint1 = useDistanceConstraint(link1, link2, {
         distance: 2
       });
-    useDistanceConstraint(link2, link3, {
+    const constraint2 = useDistanceConstraint(link2, link3, {
     distance: 2
     });
-    useDistanceConstraint(link3, link4, {
+    const constraint3 = useDistanceConstraint(link3, link4, {
         distance: 2
     });
-    useLockConstraint(link4, link5, {
+    const constraint4 = useLockConstraint(link4, link5, {
         distance: 2
     });
-    const listOfFishComponents = []
-    listOfFishComponents.push(null)
-    listOfFishComponents.push(<Koi ref = {FishRef} rotation = {[4.7,0,4.6]}/>)
-    listOfFishComponents.push(<Anglerfish ref = {FishRef} rotation = {[4.7,0,4.6]}/>)
-    listOfFishComponents.push(<Betta ref = {FishRef} rotation = {[4.7,0, 4.6]} />)
-    listOfFishComponents.push(<BlackLionFish ref = {FishRef} rotation = {[4.7,0, 4.6]} />)
-    listOfFishComponents.push(<Blobfish ref = {FishRef} rotation = {[4.7,0, 4.6]} />)
-    listOfFishComponents.push(<BlueGoldfish ref = {FishRef} rotation = {[4.7,0, 4.6]} />)
-    console.log(listOfFishComponents)
-
-    function chooseFish(fishId) {
-        console.log(listOfFishComponents[fishId])
-        return (
-            <>
-                {listOfFishComponents[fishId]}
-            </>
-            
-        )
-    }
-    
     return (
         <group>
             <group ref = {link1}>
@@ -96,22 +74,20 @@ export const FishChain = forwardRef((props, ref) => {
                     <meshLambertMaterial color="hotpink" />
                 </mesh>
             </group>
-            <group ref = {ref} name = {'hello'}>
-                <group ref = {link5} name = {'hello2'}
-                // onClick={() => {
-                //     api5.applyImpulse([3, 3, 3], [0, 0, 0])
-                //     console.log(link5.current.position);
-                // }}
-                >
-                    <mesh>
-                        {chooseFish(props.fishId)}
-                    </mesh>
-                </group>            
-            </group>
+            <group ref = {link5} name = {'hello2'}
+            // onClick={() => {
+            //     api5.applyImpulse([3, 3, 3], [0, 0, 0])
+            //     console.log(link5.current.position);
+            // }}
+            >
+                <mesh>
+                    {props.FishComponent}
+                </mesh>
+            </group>            
             
 
         </group>
            
     )
 
-});
+};

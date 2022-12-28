@@ -2,7 +2,8 @@
 import React, { useRef, useEffect, forwardRef } from "react";
 import { useGLTF, useAnimations } from "@react-three/drei";
 
-export const Koi = forwardRef((props, ref) => {
+export const Koi = (props) => {
+  const ref = useRef()
   const { nodes, materials, animations } = useGLTF(process.env.PUBLIC_URL + "/models/GLB/Koi.glb");
   const { actions } = useAnimations(animations, ref);
   useEffect(() => {
@@ -51,9 +52,10 @@ export const Koi = forwardRef((props, ref) => {
         </group>
       </group>
   );
-})
+}
 
-export const Anglerfish = forwardRef((props, ref) => {
+export const Anglerfish = (props) => {
+  const ref = useRef()
   const { nodes, materials, animations } = useGLTF(process.env.PUBLIC_URL + "/models/GLB/Anglerfish.glb");
   const { actions } = useAnimations(animations, ref);
   useEffect(() => {
@@ -107,8 +109,9 @@ export const Anglerfish = forwardRef((props, ref) => {
       </group>
     </group>
   );
-})
-export const Betta = forwardRef((props, ref) => {
+}
+export const Betta = (props) => {
+  const ref = useRef()
   const { nodes, materials, animations } = useGLTF(process.env.PUBLIC_URL + "/models/GLB/Betta.glb");
   const { actions } = useAnimations(animations, ref);
   useEffect(() => {
@@ -144,9 +147,10 @@ export const Betta = forwardRef((props, ref) => {
       </group>
     </group>
   );
-})
+}
 
-export const BlackLionFish = forwardRef((props, ref) => {
+export const BlackLionFish = (props) => {
+  const ref = useRef()
   const { nodes, materials, animations } = useGLTF(process.env.PUBLIC_URL + "/models/GLB/BlackLionFish.glb");
   const { actions } = useAnimations(animations, ref);
   useEffect(() => {
@@ -189,9 +193,10 @@ export const BlackLionFish = forwardRef((props, ref) => {
     </group>
   );
 
-})
+}
 
-export const Blobfish = forwardRef((props, ref) => {
+export const Blobfish = (props) => {
+  const ref = useRef()
   const { nodes, materials, animations } = useGLTF(process.env.PUBLIC_URL + "/models/GLB/Blobfish.glb");
   const { actions } = useAnimations(animations, ref);
   useEffect(() => {
@@ -227,9 +232,10 @@ export const Blobfish = forwardRef((props, ref) => {
       </group>
     </group>
   );
-})
+}
 
-export const BlueGoldfish = forwardRef((props, ref) => {
+export const BlueGoldfish = (props) => {
+  const ref = useRef()
   const { nodes, materials, animations } = useGLTF(process.env.PUBLIC_URL + "/models/GLB/BlueGoldfish.glb");
   const { actions } = useAnimations(animations, ref);
   useEffect(() => {
@@ -286,4 +292,4 @@ export const BlueGoldfish = forwardRef((props, ref) => {
       </group>
     </group>
   );
-})
+}

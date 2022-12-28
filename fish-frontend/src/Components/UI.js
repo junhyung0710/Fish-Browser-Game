@@ -1,7 +1,7 @@
 import '../css/UI.css'
 import React, {useState} from 'react'
 import ButtonDisplay from './UI_Components/ButtonDisplay'
-function UI({handleButtonClick, number}) {
+function UI({handleFishChangeClick, number}) {
     return(
         <div>
             <div className = 'toggle-switch'>
@@ -11,7 +11,7 @@ function UI({handleButtonClick, number}) {
                 </label>
             </div>
             <div className='button'>
-                <button onClick = {handleButtonClick} type = "button">
+                <button onClick = {handleFishChangeClick} type = "button">
                     hello {number}
                 </button>
             </div>
