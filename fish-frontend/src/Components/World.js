@@ -1,23 +1,40 @@
-import React, { Suspense, useRef, useEffect } from "react";
-import { useLoader, useThree } from '@react-three/fiber'
+import React, { Suspense, useRef, useEffect, forwardRef, useState } from "react";
+import { useFrame, useLoader, useThree } from '@react-three/fiber'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
-import { Koi } from '../Components/Fishes/Koi'
 import { Rod } from '../Components/Materials/Rod'
 import { FishChain } from '../Components/Materials/Chain'
 import { useGLTF } from '@react-three/drei'
 import { Physics, useBox, useCylinder, usePlane, useDistanceConstraint } from '@react-three/cannon'
+import { SphereGeometry } from "three";
 
-export default function World() {
+export default function World({fishId}) {
+    const fishingLineRef = useRef()
+    const fishingHeadRef = useRef()
+    const [fishPos, setFishPos] = useState([0,0,0])
+    const [fishingLinePos, setFishingLinePos] = useState([0,0,0])
+    console.log(fishId)
     useThree(({camera}) => {
         camera.position.set(20,20,20)
       });
+    // useEffect(() => {
+    //     fishingHeadRef.current.position.x = fishingLineRef.current.children[0].position.x - 20
+    //     fishingHeadRef.current.position.y = fishingLineRef.current.children[0].position.y + 0.8
+    //     fishingHeadRef.current.position.z = fishingLineRef.current.children[0].position.z
+    //     console.log(fishingHeadRef.current)
+    // }, [])
+    // useFrame(() => {
+    //     fishingHeadRef.current.position.x += 0.1 
+
+        
+        
+    // }
+    // )
     const gltf = useLoader(GLTFLoader, process.env.PUBLIC_URL + "/models/waterfall.glb")
     return (    
         <Physics>
             <Plane position={[0, -1.5, 0]} />
             <primitive object={gltf.scene} position = {[0,0.42,0]} scale = {[4,4,4]}/>
-            <Fish position={[10, 10, 0]}/>
-            <FishingRod/>
+            <FishingRod ref = {fishingLineRef} fishId = {fishId}/>
         </Physics>
     )
 }
@@ -33,29 +50,17 @@ function Plane(props) {
   }
 
 
-function Fish(props) {
-    const [ref] = useBox(() => ({ mass: 1, position: [0, 5, 0], ...props }))
-    return (
-        <group ref = {ref}>
-            <Koi/>
-        </group>
-    )
-}
-
-function FishingRod(props) {
-    const [ref] = useCylinder(() => ({mass: 0, ...props}))
-    const child1 = useRef()
-    useEffect(() => {
-        console.log(child1)
-    }, [])
+const FishingRod = forwardRef((props, ref) => {
+    console.log(props.fishId)
+    const [cylinderRef] = useCylinder(() => ({mass: 0, ...props}))
     return (
         <group>
-            <group ref = {ref}>
+            <group ref = {cylinderRef}>
                 <Rod position = {[30,10,0]} scale = {[2,1,2]} rotation =  {[-Math.PI / 2, 0, Math.PI / 2]}/>
             </group>
-            <FishChain ref = {child1}/>
+            <FishChain ref = {ref} fishId = {props.fishId}/>
         </group>
         
     )
-}
+})
 

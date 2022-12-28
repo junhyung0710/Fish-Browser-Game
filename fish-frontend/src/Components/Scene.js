@@ -5,9 +5,15 @@ import UI from './UI'
 import World from './World'
 
 function Scene() {
+    const [fishId, setFishId] = useState(0)
+    const handleButtonClick = (e) => {
+        e.preventDefault();
+        console.log(fishId)
+        setFishId(fishId + 1)
+    }
     return(
     <div style= {{position: 'relative', display: 'inline-block', width: '100vw', height: '100vh'}}>
-        <UI />
+        <UI handleButtonClick = {handleButtonClick} number = {fishId}/>
         <Canvas style = {{position: 'absolute', zIndex: 1}}>
             <Suspense fallback = {null}>
                 <Environment
@@ -17,7 +23,7 @@ function Scene() {
                 <ambientLight />
                 <pointLight position={[10, 10, 10]} />
                 <OrbitControls />
-                <World />
+                <World fishId = {fishId}/>
             </Suspense>
         </Canvas>
     </div>
