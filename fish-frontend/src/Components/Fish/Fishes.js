@@ -1,18 +1,29 @@
 
-import React, { useRef, useEffect, forwardRef } from "react";
+import React, { useRef, useEffect, forwardRef, useImperativeHandle, useState } from "react";
 import { useGLTF, useAnimations } from "@react-three/drei";
+import { WebGLUniformsGroups } from "three";
 
-export const Koi = (props) => {
-  const ref = useRef()
+export const Koi = forwardRef((props, ref) => {
+  const group = useRef()
   const { nodes, materials, animations } = useGLTF(process.env.PUBLIC_URL + "/models/GLB/Koi.glb");
-  const { actions } = useAnimations(animations, ref);
-  useEffect(() => {
-    actions.Swimming_Fast.play()
-
-  }, [])
+  const { actions } = useAnimations(animations, group);
+  const [pausedState, setPausedState] = useState(false)
+  
+  console.log(actions.Swimming_Fast)
   // useFrame(() => (group.current.position.x += 0.01));
+  useImperativeHandle(ref, () => ({
+    
+    toggleAnimation(on) {
+      actions.Swimming_Fast.play()
+      if (on) {
+        actions.Swimming_Fast.paused = false
+      } else {
+        actions.Swimming_Fast.paused = true
+      }
+    }
+  }))
   return (
-      <group ref={ref} {...props} dispose={null}>
+      <group ref={group} {...props} dispose={null}>
         <group name="Scene">
           <group name="Fish_Armature">
             <primitive object={nodes.Main1} />
@@ -52,18 +63,24 @@ export const Koi = (props) => {
         </group>
       </group>
   );
-}
+})
 
-export const Anglerfish = (props) => {
-  const ref = useRef()
+export const Anglerfish = forwardRef((props, ref) => {
+  const group = useRef()
   const { nodes, materials, animations } = useGLTF(process.env.PUBLIC_URL + "/models/GLB/Anglerfish.glb");
-  const { actions } = useAnimations(animations, ref);
-  useEffect(() => {
-    actions.Swimming_Fast.play()
-
-  }, [])
+  const { actions } = useAnimations(animations, group);
+  useImperativeHandle(ref, () => ({
+    toggleAnimation(on) {
+      actions.Swimming_Fast.play()
+      if (on) {
+        actions.Swimming_Fast.paused = false
+      } else {
+        actions.Swimming_Fast.paused = true
+      }
+    }
+  }))
   return (
-    <group ref={ref} {...props} dispose={null}>
+    <group ref={group} {...props} dispose={null}>
       <group name="Scene">
         <group name="Fish_Armature">
           <primitive object={nodes.Main1} />
@@ -109,17 +126,23 @@ export const Anglerfish = (props) => {
       </group>
     </group>
   );
-}
-export const Betta = (props) => {
-  const ref = useRef()
+})
+export const Betta = forwardRef((props, ref) => {
+  const group = useRef()
   const { nodes, materials, animations } = useGLTF(process.env.PUBLIC_URL + "/models/GLB/Betta.glb");
-  const { actions } = useAnimations(animations, ref);
-  useEffect(() => {
-    actions.Swimming_Fast.play()
-
-  }, [])
+  const { actions } = useAnimations(animations, group);
+  useImperativeHandle(ref, () => ({
+    toggleAnimation(on) {
+      actions.Swimming_Fast.play()
+      if (on) {
+        actions.Swimming_Fast.paused = false
+      } else {
+        actions.Swimming_Fast.paused = true
+      }
+    }
+  }))
   return (
-    <group ref={ref} {...props} dispose={null}>
+    <group ref={group} {...props} dispose={null}>
       <group name="Scene">
         <group name="Fish_Armature">
           <primitive object={nodes.Main1} />
@@ -147,18 +170,24 @@ export const Betta = (props) => {
       </group>
     </group>
   );
-}
+})
 
-export const BlackLionFish = (props) => {
-  const ref = useRef()
+export const BlackLionFish = forwardRef((props, ref) => {
+  const group = useRef()
   const { nodes, materials, animations } = useGLTF(process.env.PUBLIC_URL + "/models/GLB/BlackLionFish.glb");
-  const { actions } = useAnimations(animations, ref);
-  useEffect(() => {
-    actions.Swimming_Fast.play()
-
-  }, [])
+  const { actions } = useAnimations(animations, group);
+  useImperativeHandle(ref, () => ({
+    toggleAnimation(on) {
+      actions.Swimming_Fast.play()
+      if (on) {
+        actions.Swimming_Fast.paused = false
+      } else {
+        actions.Swimming_Fast.paused = true
+      }
+    }
+  }))
   return (
-    <group ref={ref} {...props} dispose={null}>
+    <group ref={group} {...props} dispose={null}>
       <group name="Scene">
         <group name="Fish_Armature">
           <primitive object={nodes.Main1} />
@@ -193,18 +222,24 @@ export const BlackLionFish = (props) => {
     </group>
   );
 
-}
+})
 
-export const Blobfish = (props) => {
-  const ref = useRef()
+export const Blobfish = forwardRef((props, ref) => {
+  const group = useRef()
   const { nodes, materials, animations } = useGLTF(process.env.PUBLIC_URL + "/models/GLB/Blobfish.glb");
-  const { actions } = useAnimations(animations, ref);
-  useEffect(() => {
-    actions.Swimming_Fast.play()
-
-  }, [])
+  const { actions } = useAnimations(animations, group);
+  useImperativeHandle(ref, () => ({
+    toggleAnimation(on) {
+      actions.Swimming_Fast.play()
+      if (on) {
+        actions.Swimming_Fast.paused = false
+      } else {
+        actions.Swimming_Fast.paused = true
+      }
+    }
+  }))
   return (
-    <group ref={ref} {...props} dispose={null}>
+    <group ref={group} {...props} dispose={null}>
       <group name="Scene">
         <group name="Fish_Armature">
           <primitive object={nodes.Main1} />
@@ -232,18 +267,24 @@ export const Blobfish = (props) => {
       </group>
     </group>
   );
-}
+})
 
-export const BlueGoldfish = (props) => {
-  const ref = useRef()
+export const BlueGoldfish = forwardRef((props, ref) => {
+  const group = useRef()
   const { nodes, materials, animations } = useGLTF(process.env.PUBLIC_URL + "/models/GLB/BlueGoldfish.glb");
-  const { actions } = useAnimations(animations, ref);
-  useEffect(() => {
-    actions.Swimming_Fast.play()
-
-  }, [])
+  const { actions } = useAnimations(animations, group);
+  useImperativeHandle(ref, () => ({
+    toggleAnimation(on) {
+      actions.Swimming_Fast.play()
+      if (on) {
+        actions.Swimming_Fast.paused = false
+      } else {
+        actions.Swimming_Fast.paused = true
+      }
+    }
+  }))
   return (
-    <group ref={ref} {...props} dispose={null}>
+    <group ref= {group} {...props} dispose={null}>
       <group name="Scene">
         <group name="Fish_Armature">
           <primitive object={nodes.Main1} />
@@ -292,4 +333,4 @@ export const BlueGoldfish = (props) => {
       </group>
     </group>
   );
-}
+})

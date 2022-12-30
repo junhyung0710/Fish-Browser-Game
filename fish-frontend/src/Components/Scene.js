@@ -5,11 +5,13 @@ import UI from './UI'
 import World from './World'
 
 function Scene() {
-    const [fishId, setFishId] = useState(4)
+    const [fishId, setFishId] = useState(2)
+    const chainref = useRef()
     const handleFishChangeClick = (e) => {
         e.preventDefault();
         console.log(fishId)
         setFishId(fishId + 1)
+        chainref.current.swapChildren()
     }
     return(
     <div style= {{position: 'relative', display: 'inline-block', width: '100vw', height: '100vh'}}>
@@ -23,7 +25,7 @@ function Scene() {
                 <ambientLight />
                 <pointLight position={[10, 10, 10]} />
                 <OrbitControls />
-                <World fishId = {fishId}/>
+                <World fishId = {fishId} ref = {chainref}/>
             </Suspense>
         </Canvas>
     </div>

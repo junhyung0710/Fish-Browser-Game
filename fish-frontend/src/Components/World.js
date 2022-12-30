@@ -1,53 +1,61 @@
-import React, { Suspense, useRef, useEffect, forwardRef, useState } from "react";
+import React, { Suspense, useRef, useEffect, forwardRef, useState, useImperativeHandle } from "react";
 import { useFrame, useLoader, useThree } from '@react-three/fiber'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 import { Rod } from '../Components/Materials/Rod'
 import { FishChain } from '../Components/Materials/Chain'
 import { useGLTF } from '@react-three/drei'
 import { Physics, useBox, useCylinder, usePlane, useDistanceConstraint } from '@react-three/cannon'
-import { SphereGeometry } from "three";
 import { Koi, Anglerfish, Betta, BlackLionFish, Blobfish, BlueGoldfish } from '../Components/Fish/Fishes'
-export default function World({fishId}) {
-    console.log(fishId)
+const World = forwardRef((props, ref) => {
+    const [chosenSpot, setChosenSpot] = useState([15,12,-7])
+    const [currentVisibleIndex, setCurrentVisibleIndex] = useState(0) 
+    const [hookInPlace, setHookInPlace] = useState(true)
+    const placeholderref = useRef()
+    const HookRef = useRef()
+    const KoiRef = useRef()
+    const AnglerfishRef = useRef()
+    const BettaRef = useRef()
+    const BlackLionFishRef = useRef()
+    const BlobfishRef = useRef()
+    const BlueGoldfishRef = useRef()
+    const refarray = [KoiRef, AnglerfishRef, BettaRef, BlackLionFishRef, BlobfishRef]
+    
     useThree(({camera}) => {
         camera.position.set(20,20,20)
       });
-    const listOfFishComponents = []
-    listOfFishComponents.push(null)
-    listOfFishComponents.push(<FishChain FishComponent = {<Koi rotation = {[4.7,0,4.6]}/>}/>)
-    listOfFishComponents.push(<FishChain FishComponent = {<Anglerfish rotation = {[4.7,0,4.6]}/>} />)
-    listOfFishComponents.push(<FishChain FishComponent = {<Betta rotation = {[4.7,0, 4.6]} />} />)
-    listOfFishComponents.push(<FishChain FishComponent = {<BlackLionFish rotation = {[4.7,0, 4.6]} />}/>)
-    listOfFishComponents.push(<FishChain FishComponent = {<Blobfish rotation = {[4.7,0, 4.6]} />} />)
-    listOfFishComponents.push(<FishChain FishComponent = {<BlueGoldfish rotation = {[4.7,0, 4.6]} />}/>)
-      
-
-    // useEffect(() => {
-    //     fishingHeadRef.current.position.x = fishingLineRef.current.children[0].position.x - 20
-    //     fishingHeadRef.current.position.y = fishingLineRef.current.children[0].position.y + 0.8
-    //     fishingHeadRef.current.position.z = fishingLineRef.current.children[0].position.z
-    //     console.log(fishingHeadRef.current)
-    // }, [])
-    // useFrame(() => {
-    //     fishingHeadRef.current.position.x += 0.1 
-
-        
-        
-    // }
-    // )
-    console.log(fishId)
+    useImperativeHandle(ref, () => ({
+        swapChildren() {
+            HookRef.current.swapHook(chosenSpot, hookInPlace)
+            refarray[currentVisibleIndex].current.swapPos(chosenSpot, hookInPlace)
+            setHookInPlace(!hookInPlace)
+        }
+    }))
     const gltf = useLoader(GLTFLoader, process.env.PUBLIC_URL + "/models/waterfall.glb")
+    const KoiAnimationRef = useRef()
+    const AnglerfishAnimationRef = useRef()
+    const BettaAnimationRef = useRef()
+    const BlackLionFishAnimationRef = useRef()
+    const BlobfishAnimationRef = useRef()
+    const BlueGoldfishAnimationRef = useRef()
+    const fishLoaded = []
+    fishLoaded.push(<FishChain locale = {chosenSpot} ref = {HookRef} FishComponent = {null}/>)
+    fishLoaded.push(<FishChain locale = {[50,12,0]} ref = {KoiRef} FishComponent = {<Koi rotation = {[4.7,0,4.6]} ref = {KoiAnimationRef}/>}/>)
+    fishLoaded.push(<FishChain locale = {[50,12,4]} ref = {AnglerfishRef} FishComponent = {<Anglerfish rotation = {[4.7,0,4.6]} ref = {AnglerfishAnimationRef}/>} />)
+    fishLoaded.push(<FishChain locale = {[50,12,8]} ref = {BettaRef} FishComponent = {<Betta rotation = {[4.7,0, 4.6]} ref = {BettaAnimationRef}/>} />)
+    fishLoaded.push(<FishChain locale = {[50,12,12]} ref = {BlackLionFishRef} FishComponent = {<BlackLionFish rotation = {[4.7,0, 4.6]} ref = {BlackLionFishAnimationRef} />}/>)
+    fishLoaded.push(<FishChain locale = {[50,12,16]} ref = {BlobfishRef} FishComponent = {<Blobfish rotation = {[4.7,0, 4.6]} ref = {BlobfishAnimationRef}/>} />)
+    fishLoaded.push(<FishChain locale = {[50,12,20]} ref = {BlueGoldfishRef} FishComponent = {<BlueGoldfish rotation = {[4.7,0, 4.6]} ref = {BlueGoldfishAnimationRef}/>}/>)
     return (    
         <Physics>
             <Plane position={[0, -1.5, 0]} />
             <primitive object={gltf.scene} position = {[0,0.42,0]} scale = {[4,4,4]}/>
             <group>
-                <Rod position = {[30,10,0]} scale = {[2,1,2]} rotation =  {[-Math.PI / 2, 0, Math.PI / 2]}/>
-                {listOfFishComponents[fishId]}
+                <Rod position = {[30,10,0]} scale = {[2,1,2]} rotation =  {[-Math.PI / 2, 0, Math.PI / 2]} />
+                {fishLoaded} 
             </group>
         </Physics>
     )
-}
+})
 
 function Plane(props) {
     const [PlaneRef] = usePlane(() => ({ rotation: [-Math.PI / 2, 0, 0], ...props }))
@@ -58,3 +66,5 @@ function Plane(props) {
       </mesh>
     )
   }
+
+export default World
