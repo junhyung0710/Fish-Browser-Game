@@ -9,7 +9,6 @@ function Scene() {
     const chainref = useRef()
     const handleFishChangeClick = (e) => {
         e.preventDefault();
-        console.log(fishId)
         setFishId(fishId + 1)
         chainref.current.swapChildren()
     }
@@ -20,7 +19,7 @@ function Scene() {
             <Suspense fallback = {null}>
                 <Environment
                 background={true} // Whether to affect scene.background
-                files={process.env.PUBLIC_URL + "/models/HDRI/sky_linekotsi_23_HDRI.hdr"}
+                files={process.env.PUBLIC_URL + "/models/HDRI/sky_linekotsi_15_HDRI.hdr"}
                 />
                 <ambientLight />
                 <pointLight position={[10, 10, 10]} />

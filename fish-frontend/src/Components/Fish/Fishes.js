@@ -1,15 +1,12 @@
 
 import React, { useRef, useEffect, forwardRef, useImperativeHandle, useState } from "react";
 import { useGLTF, useAnimations } from "@react-three/drei";
-import { WebGLUniformsGroups } from "three";
 
 export const Koi = forwardRef((props, ref) => {
   const group = useRef()
   const { nodes, materials, animations } = useGLTF(process.env.PUBLIC_URL + "/models/GLB/Koi.glb");
   const { actions } = useAnimations(animations, group);
   const [pausedState, setPausedState] = useState(false)
-  
-  console.log(actions.Swimming_Fast)
   // useFrame(() => (group.current.position.x += 0.01));
   useImperativeHandle(ref, () => ({
     
