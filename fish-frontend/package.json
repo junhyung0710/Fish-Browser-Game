@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@pmndrs/cannon-worker-api": "^2.3.0",
     "@react-spring/three": "^9.6.1",
     "@react-three/cannon": "^6.5.0",
     "@react-three/drei": "^9.47.1",

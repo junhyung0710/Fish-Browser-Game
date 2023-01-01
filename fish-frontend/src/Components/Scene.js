@@ -5,16 +5,23 @@ import UI from './UI'
 import World from './World'
 
 function Scene() {
-    const [fishId, setFishId] = useState(2)
+    const [fishId, setFishId] = useState(0)
     const chainref = useRef()
-    const handleFishChangeClick = (e) => {
+    const handleFishChangeForward = (e) => {
         e.preventDefault();
         setFishId(fishId + 1)
+    }
+    const handleFishChangeBackward = (e) => {
+        e.preventDefault();
+        setFishId(fishId -1)
+    }
+    const handleSwapClick = (e) =>{
+        e.preventDefault();
         chainref.current.swapChildren()
     }
     return(
     <div style= {{position: 'relative', display: 'inline-block', width: '100vw', height: '100vh'}}>
-        <UI handleFishChangeClick = {handleFishChangeClick} number = {fishId}/>
+        <UI handleFishChangeForward = {handleFishChangeForward} handleFishChangeBackward = {handleFishChangeBackward} handleSwapClick ={handleSwapClick} number = {fishId}/>
         <Canvas style = {{position: 'absolute', zIndex: 1}}>
             <Suspense fallback = {null}>
                 <Environment

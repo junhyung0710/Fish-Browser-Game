@@ -125,61 +125,61 @@ export const FishChain = forwardRef((props, ref) => {
             }  
         }
     }))
-    const constraint1 = useDistanceConstraint(link1, link2, {
+    const constraint1 = useLockConstraint(link1, link2, {
         distance: 1
       });
-    const constraint2 = useDistanceConstraint(link2, link3, {
+    const constraint2 = useLockConstraint(link2, link3, {
         distance: 1
     });
-    const constraint3 = useDistanceConstraint(link3, link4, {
+    const constraint3 = useLockConstraint(link3, link4, {
         distance: 1
     });
-    const constraint4 = useDistanceConstraint(link4, link5, {
+    const constraint4 = useLockConstraint(link4, link5, {
         distance: 1
     });
-    const constraint5 = useDistanceConstraint(link5, link6, {
+    const constraint5 = useLockConstraint(link5, link6, {
         distance: 1
     });
-    const constraint6 = useDistanceConstraint(link6, link7, {
+    const constraint6 = useLockConstraint(link6, link7, {
         distance: 1
     });
-    const constraint7 = useDistanceConstraint(link7, link8, {
+    const constraint7 = useLockConstraint(link7, link8, {
         distance: 1
     });
-    const constraint8 = useDistanceConstraint(link8, link9, {
+    const constraint8 = useLockConstraint(link8, link9, {
         distance: 1
     });
-    const constraint9 = useDistanceConstraint(link9, link10, {
+    const constraint9 = useLockConstraint(link9, link10, {
         distance: 1
     });
-    const constraint10 = useDistanceConstraint(link10, link11, {
+    const constraint10 = useLockConstraint(link10, link11, {
         distance: 1
     });
-    const constraint11 = useDistanceConstraint(link11, link12, {
+    const constraint11 = useLockConstraint(link11, link12, {
         distance: 1
     });
     const constraint12 = useDistanceConstraint(link12, link13, {
         distance: 1
     });
-    const constraint13 = useDistanceConstraint(link13, link14, {
+    const constraint13 = useLockConstraint(link13, link14, {
         distance: 1
     });
-    const constraint14 = useDistanceConstraint(link14, link15, {
+    const constraint14 = useLockConstraint(link14, link15, {
         distance: 1
     });
-    const constraint15 = useDistanceConstraint(link15, link16, {
+    const constraint15 = useLockConstraint(link15, link16, {
         distance: 1
     });
-    const constraint16 = useDistanceConstraint(link16, link17, {
+    const constraint16 = useLockConstraint(link16, link17, {
         distance: 1
     });
-    const constraint17 = useDistanceConstraint(link17, link18, {
+    const constraint17 = useLockConstraint(link17, link18, {
         distance: 1
     });
-    const constraint18 = useDistanceConstraint(link18, link19, {
+    const constraint18 = useLockConstraint(link18, link19, {
         distance: 1
     });
-    const constraint19 = useDistanceConstraint(link19, link20, {
+    const constraint19 = useLockConstraint(link19, link20, {
         distance: 1
     });
     return (
