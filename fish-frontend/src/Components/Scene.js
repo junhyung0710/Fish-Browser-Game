@@ -1,6 +1,6 @@
 import React, { useRef, useState, Suspense, useEffect } from 'react'
 import { Canvas, useFrame, useThree } from '@react-three/fiber'
-import { OrbitControls, Environment } from '@react-three/drei'
+import { OrbitControls, Environment, Stats } from '@react-three/drei'
 import UI from './UI'   
 import World from './World'
 
@@ -33,6 +33,7 @@ function Scene() {
                 <OrbitControls />
                 <World fishId = {fishId} ref = {chainref}/>
             </Suspense>
+            <Stats />
         </Canvas>
     </div>
         
