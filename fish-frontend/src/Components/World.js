@@ -9,7 +9,7 @@ import { Physics, useBox, useCylinder, usePlane, useDistanceConstraint, Debug } 
 import { Koi, Anglerfish, Betta, BlackLionFish, Blobfish, BlueGoldfish } from '../Components/Fish/Fishes'
 import { Hook } from '../Components/Materials/Hook'
 const World = forwardRef((props, ref) => {
-    const [chosenSpot, setChosenSpot] = useState([26, 20, 0])
+    const [chosenSpot, setChosenSpot] = useState([26, 100, -100])
     const [hookInPlace, setHookInPlace] = useState(true)
     const placeholderref = useRef()
     const HookRef = useRef()
@@ -21,6 +21,7 @@ const World = forwardRef((props, ref) => {
     const BlueGoldfishRef = useRef()
     const refarray = [KoiRef, AnglerfishRef, BettaRef, BlackLionFishRef, BlobfishRef]
     const [active, setActive] = useState(false)
+    const [scaleset, setScaleSet] = useState([20,20,20])
     
     
     useImperativeHandle(ref, () => ({
@@ -41,31 +42,29 @@ const World = forwardRef((props, ref) => {
     const [fishLoaded, setFishLoaded] = useState([])
     const PhysicsRef = useRef()
     useThree(({camera}) => {
-        camera.position.set(31,5,-2)
+        camera.position.set(55,5,-10)
       });
     useEffect(() => {
         const fishesOnLoad = []
-        fishesOnLoad.push(<FishChain locale = {[50,40,0]} ref = {KoiRef} FishComponent = {<Koi rotation = {[4.7,0,4.6]} ref = {KoiAnimationRef}/>}/>)
-        fishesOnLoad.push(<FishChain locale = {[50,40,4]} ref = {AnglerfishRef} FishComponent = {<Anglerfish rotation = {[4.7,0,4.6]} ref = {AnglerfishAnimationRef} />} />)
-        fishesOnLoad.push(<FishChain locale = {[50,40,8]} ref = {BettaRef} FishComponent = {<Betta rotation = {[4.7,0, 4.6]} ref = {BettaAnimationRef}/>}  />)
-        fishesOnLoad.push(<FishChain locale = {[50,40,12]} ref = {BlackLionFishRef} FishComponent = {<BlackLionFish rotation = {[4.7,0, 4.6]} ref = {BlackLionFishAnimationRef} />}/>)
-        fishesOnLoad.push(<FishChain locale = {[50,40,16]} ref = {BlobfishRef} FishComponent = {<Blobfish rotation = {[4.7,0, 4.6]} ref = {BlobfishAnimationRef} />} />)
-        fishesOnLoad.push(<FishChain locale = {[50,40,20]} ref = {BlueGoldfishRef} FishComponent = {<BlueGoldfish rotation = {[4.7,0, 4.6]} ref = {BlueGoldfishAnimationRef} />}/>)
+        fishesOnLoad.push(<FishChain locale = {[50,100,0]} ref = {KoiRef} FishComponent = {<Koi rotation = {[4.7,0,4.6]} ref = {KoiAnimationRef} scale = {scaleset}/>}/>)
+        fishesOnLoad.push(<FishChain locale = {[50,100,4]} ref = {AnglerfishRef} FishComponent = {<Anglerfish rotation = {[4.7,0,4.6]} ref = {AnglerfishAnimationRef} scale = {scaleset}/>} />)
+        fishesOnLoad.push(<FishChain locale = {[50,100,8]} ref = {BettaRef} FishComponent = {<Betta rotation = {[4.7,0, 4.6]} ref = {BettaAnimationRef}scale = {scaleset}/>}  />)
+        fishesOnLoad.push(<FishChain locale = {[50,100,12]} ref = {BlackLionFishRef} FishComponent = {<BlackLionFish rotation = {[4.7,0, 4.6]} ref = {BlackLionFishAnimationRef} scale = {scaleset}/>}/>)
+        fishesOnLoad.push(<FishChain locale = {[50,100,16]} ref = {BlobfishRef} FishComponent = {<Blobfish rotation = {[4.7,0, 4.6]} ref = {BlobfishAnimationRef} scale = {scaleset}/>} />)
+        fishesOnLoad.push(<FishChain locale = {[50,100,20]} ref = {BlueGoldfishRef} FishComponent = {<BlueGoldfish rotation = {[4.7,0, 4.6]} ref = {BlueGoldfishAnimationRef} scale = {scaleset}/>}/>)
         setFishLoaded(fishesOnLoad)
     }, [])
     return (    
         <>
-        <primitive object={waterfall.scene} position = {[0,0.42,0]} scale = {[6,6,6]}/>
+        <primitive object={waterfall.scene} position = {[0, 90.42,0]} scale = {[15,15,15]}/>
         <primitive object={boat.scene} position = {[31,0,-24]} scale = {[0.5,0.5,0.5]} rotation = {[0, 12, 0]}/>
         <Physics key = {props.fishId}>
             <Plane position={[0, -1.5, 0]} />
             {/* <Debug color = "black" scale = {1.1}> */}
             <group>
-                <animated.mesh onClick = {() => setActive(!active)}>
                     <RodLvl5 position = {[chosenSpot[0] + 7, chosenSpot[1] + 1, chosenSpot[2]]} scale = {[2,1,2]} rotation =  {[-Math.PI / 2,Math.PI * (1/4),  Math.PI / 2]} />
-                </animated.mesh>
-                <FishChain locale = {chosenSpot} ref = {HookRef} FishComponent = {<Hook rotation = {[6.4,0,4.6]} position = {[0,0,-0.75]}/>}/>
                 {fishLoaded[props.fishId]}
+                <FishChain locale = {chosenSpot} ref = {HookRef} FishComponent = {<Hook rotation = {[6.4,0,4.6]} scale = {[6,6,6]} position = {[0,0,-0.75]}/>}/>
             </group>
             {/* </Debug> */}
         </Physics>

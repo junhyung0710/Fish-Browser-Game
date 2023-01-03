@@ -5,7 +5,7 @@ import UI from './UI'
 import World from './World'
 
 function Scene() {
-    const [fishId, setFishId] = useState(0)
+    const [fishId, setFishId] = useState(-1)
     const chainref = useRef()
     const handleFishChangeForward = (e) => {
         e.preventDefault();
