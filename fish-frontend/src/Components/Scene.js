@@ -3,6 +3,7 @@ import { Canvas, useFrame, useThree } from '@react-three/fiber'
 import { OrbitControls, Environment, Stats } from '@react-three/drei'
 import UI from './UI'   
 import World from './World'
+import CatchResults from './CatchResults.js'
 
 function Scene() {
     const [fishId, setFishId] = useState(-1)
@@ -34,6 +35,15 @@ function Scene() {
                 <World fishId = {fishId} ref = {chainref}/>
             </Suspense>
             <Stats />
+        </Canvas>
+        <Canvas style = {{position: 'absolute', zIndex: 2, background: 'white'}}>
+            <ambientLight />
+            <OrbitControls />
+            <pointLight position={[10, 10, 10]} />
+            <mesh>
+                <cylinderBufferGeometry/>
+            </mesh>
+            <CatchResults fishId = {fishId}/>
         </Canvas>
     </div>
         

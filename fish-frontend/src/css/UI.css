@@ -16,21 +16,21 @@
   padding-left: 5em;
   padding-top: 5em;
   width: 6.25em;
-  z-index: 4;
+  z-index: 5;
 }
 .button2 {
   position: absolute;
   padding-left: 8em;
   padding-top: 8em;
   width: 6.25em;
-  z-index: 3;
+  z-index: 4;
 }
 .button3 {
   position: absolute;
   padding-left: 12em;
   padding-top: 12em;
   width: 6.25em;
-  z-index: 2;
+  z-index: 3;
 }
   .toggle-switch {
     position: absolute;
